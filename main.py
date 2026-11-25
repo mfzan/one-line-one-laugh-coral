@@ -15,6 +15,11 @@ ENTRY = (
 
 
 def main() -> None:
+    # Guard the bounty gate up front: one line, 1-200 characters.
+    if "\n" in ENTRY or not 1 <= len(ENTRY) <= 200:
+        raise ValueError(
+            f"entry must be one line of 1-200 characters, got {len(ENTRY)}"
+        )
     os.makedirs("/output", exist_ok=True)
     path = "/output/entry.txt"
     with open(path, "w", encoding="utf-8") as handle:
